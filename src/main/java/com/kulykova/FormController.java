@@ -1,12 +1,15 @@
 package com.kulykova;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/form")
@@ -24,14 +27,15 @@ public class FormController {
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public ModelAndView fillForm(@RequestParam("firstName") String firstName,
+  public void fillForm(@RequestParam("firstName") String firstName,
                                @RequestParam("lastName") String lastName,
-                               @RequestParam("passport") String passport) {
+                               @RequestParam("passport") String passport,
+                               HttpServletResponse response) throws IOException {
     FormModel form = service.createForm(firstName, lastName, passport);
-    PDDocument pdfDocument = PDFDocumentFactory.createPDFDocument(form);
-    ModelAndView modelAndView = new ModelAndView("resultPDF");
-    modelAndView.addObject("pdfDocument", "done!");
+    ByteArrayOutputStream pdfDocument = PDFDocumentFactory.createPDFDocument(form);
 
-    return modelAndView;
+    response.setContentType("application/pdf");
+    response.getOutputStream().write(pdfDocument.toByteArray());
+    response.getOutputStream().close();
   }
 }
