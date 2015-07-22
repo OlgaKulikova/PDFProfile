@@ -1,5 +1,8 @@
-package com.kulykova;
+package com.kulykova.controllers;
 
+import com.kulykova.FormModel;
+import com.kulykova.FormService;
+import com.kulykova.PDFDocumentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +37,12 @@ public class FormController {
     FormModel form = service.createForm(firstName, lastName, passport);
     ByteArrayOutputStream pdfDocument = PDFDocumentFactory.createPDFDocument(form);
 
-    response.setContentType("application/pdf");
-    response.getOutputStream().write(pdfDocument.toByteArray());
-    response.getOutputStream().close();
+    if (pdfDocument != null) {
+      response.setContentType("application/pdf");
+      response.getOutputStream().write(pdfDocument.toByteArray());
+      response.getOutputStream().close();
+    } else {
+      throw new NullPointerException("Form is not loaded!");
+    }
   }
 }
