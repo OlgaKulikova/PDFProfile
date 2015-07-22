@@ -1,8 +1,8 @@
 package com.kulykova.controllers;
 
-import com.kulykova.FormModel;
-import com.kulykova.FormService;
-import com.kulykova.PDFDocumentFactory;
+import com.kulykova.model.FormModel;
+import com.kulykova.services.FormService;
+import com.kulykova.factory.PDFDocumentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

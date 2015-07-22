@@ -1,4 +1,4 @@
-package com.kulykova;
+package com.kulykova.model;
 
 public class FormModel {
   private String firstName;
