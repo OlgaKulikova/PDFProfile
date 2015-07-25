@@ -1,7 +1,6 @@
 package com.kulykova.factory;
 
 import com.kulykova.model.FormModel;
-import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
@@ -9,7 +8,6 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 public class PDFDocumentFactory {
   public static ByteArrayOutputStream createPDFDocument(FormModel formModel) {
@@ -37,7 +35,7 @@ public class PDFDocumentFactory {
       baos = new ByteArrayOutputStream();
       document.save(baos);
       document.close();
-    } catch (COSVisitorException|IOException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
 
