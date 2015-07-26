@@ -42,7 +42,7 @@ public class FormController {
       response.getOutputStream().write(pdfDocument.toByteArray());
       response.getOutputStream().close();
     } else {
-      throw new NullPointerException("Form is not loaded!");
+      throw new IllegalArgumentException("Form is not loaded!");
     }
   }
 }

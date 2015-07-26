@@ -16,7 +16,7 @@ public class PDFDocumentFactory {
     document.addPage(page);
 
     PDFont font = PDType1Font.HELVETICA_BOLD;
-    ByteArrayOutputStream baos = null;
+    ByteArrayOutputStream baos;
 
     try(PDPageContentStream stream = new PDPageContentStream(document, page)){
       stream.beginText();
@@ -36,7 +36,7 @@ public class PDFDocumentFactory {
       document.save(baos);
       document.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new RuntimeException("Form wasn't filled properly");
     }
 
     return baos;
