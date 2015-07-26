@@ -1,6 +1,5 @@
 package com.kulykova;
 
-import com.kulykova.model.FormModel;
 import com.kulykova.services.FormService;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +12,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
@@ -47,19 +46,10 @@ public class ControllersTests {
 
   @Test
   public void whenOutputStreamIsNull_ShouldRenderErrorView() throws Exception {
-    FormModel formModel = new FormModel();
-    formModel.setFirstName("Name");
-    formModel.setLastName("Surname");
-    formModel.setPassport("Passport");
-    when(formServiceMock.createForm("Name", "Surname", "Passport")).thenReturn(formModel);
-
-    /*mockMvc.perform(post("/form"))
+    mockMvc.perform(post("/form"))
         .andExpect(view().name("error"))
-        .andExpect(forwardedUrl("/WEB-INF/pages/error.jsp"));*/
-
-    verify(formServiceMock, times(1)).createForm("Name", "Surname", "Passport");
-    verifyZeroInteractions(formServiceMock);
-
+        .andExpect(forwardedUrl("/WEB-INF/pages/error.jsp"));
   }
+
 
 }
