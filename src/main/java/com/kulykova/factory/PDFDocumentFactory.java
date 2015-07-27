@@ -6,9 +6,11 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
 
+@Component
 public class PDFDocumentFactory {
   public static ByteArrayOutputStream createPDFDocument(FormModel formModel) {
     PDDocument document = new PDDocument();
