@@ -1,4 +1,4 @@
-package com.kulykova;
+package com.kulykova.controllers;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -7,4 +7,8 @@
        <bean id="formService" name="formService" class="org.mockito.Mockito" factory-method="mock">
               <constructor-arg value="com.kulykova.services.FormService"/>
        </bean>
+
+       <bean id="PDFDocumentFactory" name="PDFDocumentFactory" class="org.mockito.Mockito" factory-method="mock">
+              <constructor-arg value="com.kulykova.services.PDFDocumentFactory"/>
+       </bean>
 </beans>

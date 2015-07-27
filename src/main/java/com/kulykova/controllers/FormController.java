@@ -2,7 +2,7 @@ package com.kulykova.controllers;
 
 import com.kulykova.model.FormModel;
 import com.kulykova.services.FormService;
-import com.kulykova.factory.PDFDocumentFactory;
+import com.kulykova.services.PDFDocumentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +18,12 @@ import java.io.IOException;
 @RequestMapping("/form")
 public class FormController {
   private final FormService service;
+  private final PDFDocumentFactory factory;
 
   @Autowired
-  public FormController(FormService service) {
+  public FormController(FormService service, PDFDocumentFactory factory) {
     this.service = service;
+    this.factory = factory;
   }
 
   @RequestMapping(method = RequestMethod.GET)
@@ -35,14 +37,10 @@ public class FormController {
                                @RequestParam("passport") String passport,
                                HttpServletResponse response) throws IOException {
     FormModel form = service.createForm(firstName, lastName, passport);
-    ByteArrayOutputStream pdfDocument = PDFDocumentFactory.createPDFDocument(form);
+    ByteArrayOutputStream pdfDocument = factory.createPDFDocument(form);
 
-    if (pdfDocument != null) {
-      response.setContentType("application/pdf");
-      response.getOutputStream().write(pdfDocument.toByteArray());
-      response.getOutputStream().close();
-    } else {
-      throw new IllegalArgumentException("Form is not loaded!");
-    }
+    response.setContentType("application/pdf");
+    response.getOutputStream().write(pdfDocument.toByteArray());
+    response.getOutputStream().close();
   }
 }

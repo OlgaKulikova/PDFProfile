@@ -1,4 +1,4 @@
-package com.kulykova;
+package com.kulykova.controllers;
 
 import com.kulykova.services.FormService;
 import org.junit.Before;
