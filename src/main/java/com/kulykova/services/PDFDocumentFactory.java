@@ -38,7 +38,7 @@ public class PDFDocumentFactory {
     return baos;
   }
 
-  protected PDPageContentStream getPdPageContentStream(FormModel formModel, PDFont font) throws IOException {
+  public PDPageContentStream getPdPageContentStream(FormModel formModel, PDFont font) throws IOException {
     PDPageContentStream stream = new PDPageContentStream(document, page);
     stream.beginText();
     stream.setFont(font, 14);

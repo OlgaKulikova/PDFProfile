@@ -17,8 +17,8 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/form")
 public class FormController {
-  private final FormService service;
-  private final PDFDocumentFactory factory;
+  private FormService service;
+  private PDFDocumentFactory factory;
 
   @Autowired
   public FormController(FormService service, PDFDocumentFactory factory) {
