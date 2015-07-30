@@ -1,8 +1,7 @@
 package com.kulykova.controllers;
 
 import com.kulykova.model.FormModel;
-import com.kulykova.services.FormService;
-import com.kulykova.services.PDFDocumentFactory;
+import com.kulykova.factory.PDFDocumentFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
@@ -31,12 +30,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/PDFProfile-servlet.xml",
     "file:src/test/resorces/testContext.xml"})
 @WebAppConfiguration
-public class ControllersTests {
+public class FormControllerTest {
   private MockMvc mockMvc;
   private FormModel formModel;
-
-  @Autowired
-  private FormService formServiceMock;
 
   @Autowired
   private PDFDocumentFactory factoryMock;
@@ -46,7 +42,6 @@ public class ControllersTests {
 
   @Before
   public void setUp() {
-    reset(formServiceMock);
     reset(factoryMock);
     mockMvc = webAppContextSetup(wac).build();
 

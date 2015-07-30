@@ -16,5 +16,7 @@
     </div>
   </div>
 </div>
+<br><br>
+<h3 align="center"><a href="${pageContext.request.contextPath}/form">Try again</a></h3>
 </body>
 </html>
